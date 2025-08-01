@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3001;
 
 // Configure multer for file uploads
 const upload = multer({
-  dest: path.join(__dirname, '../data/uploads'),
+  dest: '/tmp',
   limits: {
     fileSize: 10 * 1024 * 1024, // 10MB limit
   },
@@ -33,7 +33,7 @@ const upload = multer({
 
 // Configure multer for logo uploads
 const logoUpload = multer({
-  dest: path.join(__dirname, '../data/uploads/logos'),
+  dest: '/tmp',
   limits: {
     fileSize: 5 * 1024 * 1024, // 5MB limit for images
   },
@@ -56,9 +56,7 @@ app.use(morgan('combined'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Static files for uploads and generated files
-app.use('/uploads', express.static(path.join(__dirname, '../../data/uploads')));
-app.use('/generated', express.static(path.join(__dirname, '../../data/generated')));
+
 
 // Template routes
 app.get('/api/templates', (req, res) => {
