@@ -1,0 +1,20 @@
+{
+  "name": "ai-docuwriter",
+  "version": "1.0.0",
+  "description": "A full-stack application for generating AI-powered enterprise architecture documents.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hammton/AI-DocWriter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hammton/AI-DocWriter/issues"
+  },
+  "homepage": "https://github.com/Hammton/AI-DocWriter#readme"
+}
