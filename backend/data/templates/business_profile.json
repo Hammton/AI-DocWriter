@@ -1,0 +1,59 @@
+{
+  "id": "business-profile",
+  "name": "Business Profile Report",
+  "description": "Comprehensive business profile analysis and strategic assessment",
+  "avgPages": 10,
+  "sections": [
+    {
+      "title": "Business Overview",
+      "content": "This report provides a comprehensive business analysis of {application_name} within {organization_name}. The application serves as a critical business enabler in the {application_area} domain, supporting key operational processes and strategic objectives under the ownership of {business_owner}."
+    },
+    {
+      "title": "Business Value",
+      "content": "The business value proposition of {application_name} centers on {capabilities} within the {application_category} space. The application contributes to organizational efficiency and supports strategic business objectives through automated processes and integrated workflows."
+    },
+    {
+      "title": "Stakeholder Analysis",
+      "content": "Key stakeholders for {application_name} include {application_owner} as the application owner and {business_owner} as the business owner. The application serves users across {organization_name} and maintains {application_status} operational status."
+    },
+    {
+      "title": "Process Integration",
+      "content": "Business process integration for {application_name} encompasses {context_information}. The application integrates with {dependencies} to support end-to-end business workflows and maintain operational continuity across the organization."
+    },
+    {
+      "title": "Performance Metrics",
+      "content": "Performance measurement for {application_name} includes operational metrics, user satisfaction, and business impact assessments. The application maintains {application_tier} tier performance standards and supports business objectives within the {application_area} domain."
+    },
+    {
+      "title": "Investment Analysis",
+      "content": "The investment profile for {application_name} includes total cost of ownership of {tco}, with ongoing operational expenses of {opex}. Licensing costs for {license_info} and vendor support from {vendor} represent key financial considerations for business planning."
+    },
+    {
+      "title": "Risk Assessment",
+      "content": "Business risks associated with {application_name} include operational dependencies, vendor relationships, and integration complexities. Risk mitigation strategies should address {integration_points} and ensure business continuity planning."
+    },
+    {
+      "title": "Strategic Recommendations",
+      "content": "Strategic business recommendations for {application_name} focus on maximizing value delivery and operational efficiency. {recommendations} These recommendations support long-term business objectives and ensure optimal return on technology investment."
+    }
+  ],
+  "placeholders": [
+    "application_name",
+    "organization_name",
+    "application_area",
+    "business_owner",
+    "capabilities",
+    "application_category",
+    "application_owner",
+    "application_status",
+    "context_information",
+    "dependencies",
+    "application_tier",
+    "tco",
+    "opex",
+    "license_info",
+    "vendor",
+    "integration_points",
+    "recommendations"
+  ]
+}

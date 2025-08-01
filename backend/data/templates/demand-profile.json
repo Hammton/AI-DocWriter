@@ -1,0 +1,57 @@
+{
+  "id": "demand-profile",
+  "name": "Demand Profile Report",
+  "description": "Comprehensive demand analysis and forecasting report",
+  "avgPages": 8,
+  "sections": [
+    {
+      "title": "Executive Summary",
+      "content": "This section provides an overview of the demand analysis for {application_name}. The assessment evaluates current usage patterns, capacity requirements, and future demand projections to support strategic planning and resource allocation decisions."
+    },
+    {
+      "title": "Current Demand Analysis",
+      "content": "The current demand for {application_name} is characterized by {context_information}. Analysis of usage patterns indicates {capabilities} with primary utilization within the {application_area} domain."
+    },
+    {
+      "title": "Capacity Assessment",
+      "content": "Current system capacity supports {application_tier} tier operations with {license_utilization}. The application handles core business processes for {organization_name} with integration points including {dependencies}."
+    },
+    {
+      "title": "Usage Patterns",
+      "content": "User engagement patterns for {application_name} demonstrate consistent utilization across {application_category} functions. Peak usage occurs during standard business operations with system performance maintained within acceptable parameters."
+    },
+    {
+      "title": "Future Demand Projections",
+      "content": "Based on current trends and business growth projections, demand for {application_name} is expected to evolve in alignment with organizational objectives. Capacity planning should consider {recommendations} to support anticipated growth."
+    },
+    {
+      "title": "Resource Requirements",
+      "content": "Supporting {application_name} requires ongoing investment in licensing ({license_info}), infrastructure, and maintenance. Total cost considerations include {tco} with operational expenses of {opex} managed by {vendor}."
+    },
+    {
+      "title": "Risk Assessment",
+      "content": "Demand-related risks for {application_name} include capacity constraints, license limitations, and integration dependencies. Mitigation strategies should address {integration_points} and ensure adequate resource allocation."
+    },
+    {
+      "title": "Recommendations",
+      "content": "Strategic recommendations for managing demand include optimizing license utilization, monitoring capacity trends, and maintaining integration architecture. {recommendations} should be implemented to support sustainable growth and operational efficiency."
+    }
+  ],
+  "placeholders": [
+    "application_name",
+    "context_information",
+    "capabilities",
+    "application_area",
+    "application_tier",
+    "license_utilization",
+    "organization_name",
+    "dependencies",
+    "application_category",
+    "recommendations",
+    "license_info",
+    "tco",
+    "opex",
+    "vendor",
+    "integration_points"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "id": "application-profile",
+  "name": "Application Profile Report",
+  "description": "Comprehensive application profile analysis and documentation",
+  "avgPages": 12,
+  "sections": [
+    {
+      "title": "Executive Summary",
+      "content": "This report provides a comprehensive analysis of {application_name}, a {application_category} application owned by {application_owner} within {organization_name}. The application serves critical business functions in the {application_area} domain and maintains {application_status} status with {application_tier} tier classification."
+    },
+    {
+      "title": "Technical Architecture",
+      "content": "The technical architecture of {application_name} is designed to support {capabilities} within the organization's infrastructure. The system integrates with {dependencies} and operates as a {application_tier} tier application with established integration points: {integration_points}."
+    },
+    {
+      "title": "Dependencies",
+      "content": "System dependencies for {application_name} include strategic integrations with external systems and services. The application maintains connections to {dependency_list} which are essential for operational functionality and data exchange within {organization_name}'s technology ecosystem."
+    },
+    {
+      "title": "Context Model",
+      "content": "Operating within {organization_name}'s technology landscape, {application_name} serves as a key component in the {application_area} domain. {context_information} The application supports business operations through established workflows and user interfaces managed by {business_owner}."
+    },
+    {
+      "title": "Footprint",
+      "content": "The financial and operational footprint of {application_name} includes total cost of ownership of {tco}, with capital expenditure of {capex} and operational expenses of {opex}. The application is supported by {vendor} with licensing arrangements including {license_info}."
+    },
+    {
+      "title": "Capability Automation",
+      "content": "Automation capabilities within {application_name} streamline business processes and reduce manual intervention. The system provides {capabilities} and supports operational efficiency through automated workflows and integration with {dependencies}."
+    },
+    {
+      "title": "Recommendations",
+      "content": "Based on the comprehensive analysis of {application_name}, the following strategic recommendations are proposed: {recommendations}. These recommendations focus on optimizing performance, managing costs, and ensuring alignment with organizational objectives."
+    }
+  ],
+  "placeholders": [
+    "application_name",
+    "application_category",
+    "application_owner",
+    "organization_name",
+    "application_area",
+    "application_status",
+    "application_tier",
+    "capabilities",
+    "dependencies",
+    "integration_points",
+    "dependency_list",
+    "context_information",
+    "business_owner",
+    "tco",
+    "capex",
+    "opex",
+    "vendor",
+    "license_info",
+    "recommendations"
+  ]
+}

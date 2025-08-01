@@ -1,0 +1,97 @@
+
+# Application Profile Report
+Developed for {organization_name} - {portal_type}
+Application Owner: {application_owner}
+Report Owner: {report_owner}
+
+## Preface
+
+**{application_id}**
+**{organization_name} {portal_type}**
+**Confidential**
+
+### What is the Purpose of this Manual?
+• This report outlines the methodology and architecture for {application_name} in {organization_name}'s technology ecosystem through the Application profile. It details how the {application_name} application aligns with {organization_name}'s digital transformation objectives, providing stakeholders with comprehensive technical insights for the system's configuration, implementation, and ongoing enhancement where applicable.
+
+### Who should read this Manual?
+• This report is intended for IT Leaders across {organization_name}, including and relevant stakeholders involved in the digital transformation process. It is also valuable for teams responsible for the configuration, implementation, and ongoing enhancement of the application within {organization_name}'s technology ecosystem.
+
+### How to use this Manual?
+• This manual is organized into clear, self-contained sections that guide you through each aspect of the application profile. Each section provides context, best practices, and actionable recommendations to support decision-making and implementation. For any questions or clarifications, reach out to the Architecture team.
+
+## Table of Contents
+• Application Profile – Overview
+• Application Profile – Dependencies
+• Application Profile – Context Model
+• Application Profile – Footprint
+• Application Profile – Capability Automation
+• Appendix
+
+---
+
+## Overview
+This section delivers a concise summary of the application's most important attributes, including its core purpose, ownership structure, and current lifecycle stage. It also highlights the application's strategic alignment with {organization_name}'s digital transformation goals and its criticality tier within the technology portfolio. By reviewing this overview, readers will quickly grasp the application's role, business value, and modernization priorities.
+
+| Application Information | Description |
+|------------------------|-------------|
+| Application Name | {application_name} - {application_id} |
+| Application Description | {application_description} |
+| Application Status | {application_status} |
+| Application Category | {application_category} |
+| Application Tier | {application_tier} |
+| Application Area | {application_area} |
+| Application Owner | {application_owner} |
+| Application Stream Leader | {stream_leader} |
+| Application Business Owner | {business_owner} |
+| Application Location | {application_location} |
+
+---
+
+## Dependencies
+This section describes the application's dependencies on other applications within {organization_name}'s technology landscape. It catalogs both upstream and downstream systems, detailing the nature of each integration and the types of data exchanged. Understanding these inter-app relationships is crucial for assessing integration complexity, identifying potential points of failure, and planning coordinated updates.
+
+| Application Name | Interface Type |
+|------------------|----------------|
+| {dependency_1} | {interface_type_1} |
+| {dependency_2} | {interface_type_2} |
+| {dependency_3} | {interface_type_3} |
+| {dependency_4} | {interface_type_4} |
+
+---
+
+## Context Model
+This section introduces the System Context Diagram, which defines the boundaries of the application within {organization_name}'s broader technology landscape. It identifies all external actors—such as end users, other systems, and third-party services—and illustrates the primary data exchanges between them. By presenting these relationships in a single, high-level view, stakeholders gain a clear understanding of where the application sits and how it interacts with its environment.
+
+**Application Context Diagram**
+*[Context diagram would be inserted here]*
+
+---
+
+## Footprint
+This section outlines the application's footprint by detailing its licensing requirements and total cost of ownership. It enumerates license types, quantities, renewal schedules, and associated support fees, alongside infrastructure and operational expense estimates.
+
+| Application Information | Description |
+|------------------------|-------------|
+| Application TCO | {application_tco} |
+| Application CapEx | {application_capex} |
+| Application OpEx | {application_opex} |
+| Application Vendor | {application_vendor} |
+| Application License | {license_name} |
+| Application License Start Date | {license_start_date} |
+| Application License End Date | {license_end_date} |
+| Application License Units | {license_units} |
+| Application License Units Utilised | {license_units_used} |
+| Application License Usage | {license_status} |
+
+---
+
+## Capability Automation
+This section maps the selected application to the organization's capability canvas, showing which business capabilities it supports and automates. It highlights each capability's role within end-to-end workflows and identifies where automation reduces manual handoffs. Use this mapping to verify coverage, pinpoint gaps, and guide future capability enhancements.
+
+**Application Capability Automation Diagram**
+*[Capability automation diagram would be inserted here]*
+
+---
+
+## End Report
+            

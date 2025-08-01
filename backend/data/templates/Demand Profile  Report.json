@@ -1,0 +1,57 @@
+{
+  "id": "demand_profile", 
+  "name": "Demand Architecture Profile Report",
+  "description": "Assessment of incoming demands to determine architectural feasibility, business impact and change implications",
+  "avgPages": 10,
+  "sections": [
+    {
+      "title": "Preface",
+      "content": "This report assesses incoming demands to determine their architectural feasibility, business impact and change implications. It provides a structured framework for evaluating requirements against {organization_name}'s existing capabilities and standards."
+    },
+    {
+      "title": "Overview",
+      "content": "**Demand Name:** {demand_name}\n**Demand Description:** {demand_description}\n**Demand Type:** {demand_type}\n**Demand Owner:** {demand_owner}\n**Submission Date:** {submission_date}\n**Impacted Organisation:** {impacted_organisation}\n**Impacted Applications:** {impacted_applications}\n**Impacted Capabilities:** {impacted_capabilities}\n**Impacted Division:** {impacted_division}\n**Impacted Business Issues:** {impacted_business_issues}\n**Impacted Project:** {impacted_project}"
+    },
+    {
+      "title": "Demand Impact Model",
+      "content": "The following diagram illustrates the scope and relationships of this demand across the enterprise architecture:\n\n{demand_impact_diagram}"
+    },
+    {
+      "title": "Capability Impact",
+      "content": "This section presents a high-level view of the capabilities affected by this initiative, listing each capability alongside the type and degree of impact. It highlights changes to maturity, automation scope, and performance expectations.\n\n{capability_impact_table}\n\n**Total Capabilities Impacted:** {total_capabilities_impacted}\n**Average Capability Maturity:** {average_capability_maturity}\n\n**Capability Architecture Assessment:** {capability_architecture_assessment}"
+    },
+    {
+      "title": "Application Impact", 
+      "content": "This section outlines the applications touched by the changes, detailing interface modifications, data flow adjustments, and configuration updates.\n\n{application_impact_table}\n\n**Total Applications Impacted:** {total_applications_impacted}\n\n**Application Architecture Assessment:** {application_architecture_assessment}"
+    },
+    {
+      "title": "Project Impact",
+      "content": "This section summarizes the broader project-level implications, including resource requirements, timeline shifts, and budget forecasts.\n\n{project_impact_table}\n\n**Total Projects Impacted:** {total_projects_impacted}\n\n**Projects Architecture Assessment:** {projects_architecture_assessment}"
+    }
+  ],
+  "placeholders": [
+    "organization_name",
+    "demand_name",
+    "demand_description",
+    "demand_type", 
+    "demand_owner",
+    "submission_date",
+    "impacted_organisation",
+    "impacted_applications",
+    "impacted_capabilities",
+    "impacted_division",
+    "impacted_business_issues",
+    "impacted_project",
+    "demand_impact_diagram",
+    "capability_impact_table",
+    "total_capabilities_impacted",
+    "average_capability_maturity",
+    "capability_architecture_assessment",
+    "application_impact_table",
+    "total_applications_impacted",
+    "application_architecture_assessment",
+    "project_impact_table",
+    "total_projects_impacted",
+    "projects_architecture_assessment"
+  ]
+}

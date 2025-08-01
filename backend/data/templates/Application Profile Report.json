@@ -1,0 +1,65 @@
+{
+  "id": "application_profile",
+  "name": "Application Profile Report",
+  "description": "Comprehensive application architecture documentation",
+  "avgPages": 12,
+  "sections": [
+    {
+      "title": "Executive Summary",
+      "content": "This section provides a high-level overview of {application_name}, its strategic value, and key architectural insights."
+    },
+    {
+      "title": "Application Overview", 
+      "content": "**Application Name:** {application_name}\n**Description:** {application_description}\n**Status:** {application_status}\n**Owner:** {application_owner}\n**Business Owner:** {business_owner}\n**Location:** {application_location}"
+    },
+    {
+      "title": "Technical Architecture",
+      "content": "**Category:** {application_category}\n**Tier:** {application_tier}\n**Area:** {application_area}\n**Dependencies:** {dependencies}\n**Integration Points:** {integration_points}"
+    },
+    {
+      "title": "Dependencies",
+      "content": "This application integrates with the following systems:\n{dependency_list}"
+    },
+    {
+      "title": "Context Model", 
+      "content": "The application operates within the broader technology landscape, interfacing with:\n{context_information}"
+    },
+    {
+      "title": "Footprint",
+      "content": "**Total Cost of Ownership:** {tco}\n**Capital Expenditure:** {capex}\n**Operational Expenditure:** {opex}\n**Vendor:** {vendor}\n**License:** {license_info}\n**License Period:** {license_start} to {license_end}\n**License Utilization:** {license_utilization}"
+    },
+    {
+      "title": "Capability Automation",
+      "content": "This application supports the following business capabilities:\n{capabilities}"
+    },
+    {
+      "title": "Recommendations",
+      "content": "Based on the analysis, the following recommendations are made:\n{recommendations}"
+    }
+  ],
+  "placeholders": [
+    "application_name",
+    "application_description", 
+    "application_status",
+    "application_owner",
+    "business_owner",
+    "application_location",
+    "application_category",
+    "application_tier",
+    "application_area",
+    "dependencies",
+    "integration_points",
+    "dependency_list",
+    "context_information",
+    "tco",
+    "capex",
+    "opex",
+    "vendor",
+    "license_info",
+    "license_start",
+    "license_end",
+    "license_utilization",
+    "capabilities",
+    "recommendations"
+  ]
+}

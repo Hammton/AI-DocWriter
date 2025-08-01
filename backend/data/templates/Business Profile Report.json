@@ -1,0 +1,44 @@
+{
+  "id": "business_profile",
+  "name": "Business Profile Report",
+  "description": "Comprehensive business division profile covering structure, capabilities, and cost analysis",
+  "avgPages": 7,
+  "sections": [
+    {
+      "title": "Preface",
+      "content": "This report presents the Business Profile for the {division_name} in {organization_name}, providing a high-level overview of its structure, the key applications it leverages, and the capabilities it delivers. It also includes a maturity assessment and total cost of ownership analysis to inform strategic planning, resource allocation, and continuous improvement initiatives."
+    },
+    {
+      "title": "Overview", 
+      "content": "**Division Name:** {division_name}\n**Division Description:** {division_description}\n**Business Group:** {business_group}\n**Head of Division:** {head_of_division}\n**Business Departments:** {business_departments}\n**Related Applications:** {related_applications}\n**Related Products:** {related_products}"
+    },
+    {
+      "title": "Division Capability Landscape (Maturity View)",
+      "content": "This section presents the division's capability profile, mapping each major capability to its assessed maturity level and the corresponding total cost of ownership. It uses established maturity models alongside TCO analyses to surface strengths, gaps, and investment needs.\n\n{capability_maturity_diagram}"
+    },
+    {
+      "title": "Division Capability Landscape (TCO View)",
+      "content": "The following capabilities have been identified with their associated costs and maturity levels:\n\n{capability_tco_table}"
+    },
+    {
+      "title": "Capability Profile Summary",
+      "content": "**Total Capabilities:** {total_capabilities}\n**Average Capability Maturity:** {average_maturity}\n**Total TCO:** {total_tco}\n\n{capability_summary_analysis}"
+    }
+  ],
+  "placeholders": [
+    "division_name",
+    "organization_name",
+    "division_description", 
+    "business_group",
+    "head_of_division",
+    "business_departments",
+    "related_applications",
+    "related_products",
+    "capability_maturity_diagram",
+    "capability_tco_table",
+    "total_capabilities",
+    "average_maturity",
+    "total_tco",
+    "capability_summary_analysis"
+  ]
+}
