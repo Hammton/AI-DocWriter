@@ -1,256 +1,266 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Upload, FileText, CheckCircle, Loader2, Eye } from 'lucide-react';
-import { WorkflowStep, GenerationStatus } from '../types';
 import { useWorkflowStore } from '../stores/workflowStore';
+import { Loader2, AlertCircle } from 'lucide-react';
+import { useProgressMessages, type ProgressMessage } from '../services/progressMessages';
+import './ReportGeneration.css';
 
-export const ReportGeneration: React.FC = () => {
+const ReportGeneration = () => {
   const navigate = useNavigate();
-  const { selectedDomain, selectedTemplate, selectedDataSource, formData, setCurrentStep } = useWorkflowStore();
-  
-  const [generationStatus, setGenerationStatus] = useState<GenerationStatus>(GenerationStatus.IDLE);
-  const [progress, setProgress] = useState(0);
-  const [sessionId, setSessionId] = useState<string | null>(null);
-  const [csvFile, setCsvFile] = useState<File | null>(null);
+  const { selectedTemplate, selectedDataSource, formData } = useWorkflowStore();
+  const [status, setStatus] = useState<'preparing' | 'generating' | 'error'>('preparing');
   const [error, setError] = useState<string>('');
+  const [progress, setProgress] = useState(0);
+  const [currentMessage, setCurrentMessage] = useState<ProgressMessage>({ message: "🎭 Calling the magic spirits...", emoji: "✨", stage: "init", category: "mystical" });
+  const [startTime, setStartTime] = useState<number>(Date.now());
+  const [showCancelWarning, setShowCancelWarning] = useState(false);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
-        setCsvFile(file);
-        setError('');
+  const { getMessageForProgress, getCancelWarningMessage, clearHistory, getMessageByCategory } = useProgressMessages();
+
+  useEffect(() => {
+    // Start the generation process
+    generateReports();
+    setStartTime(Date.now());
+  }, []);
+
+  // Update progress messages periodically
+  useEffect(() => {
+    // Define our own message arrays for guaranteed variety
+    const initMessages = [
+      { message: "🎭 Calling the magic spirits...", emoji: "✨", stage: "init", category: "mystical" },
+      { message: "🔮 Awakening the AI overlords...", emoji: "🤖", stage: "init", category: "tech" },
+      { message: "🧙‍♂️ Brewing some digital potions...", emoji: "⚗️", stage: "init", category: "mystical" },
+      { message: "🚀 Launching rockets to the cloud...", emoji: "☁️", stage: "init", category: "space" },
+      { message: "⚡ Charging up the neural networks...", emoji: "⚡", stage: "init", category: "tech" },
+      { message: "🌟 Gathering stardust for your report...", emoji: "🌟", stage: "init", category: "space" },
+      { message: "🎨 Preparing the digital canvas...", emoji: "🎨", stage: "init", category: "creative" },
+    ];
+
+    const processingMessages = [
+      { message: "🤖 Teaching robots to write poetry...", emoji: "📝", stage: "processing", category: "creative" },
+      { message: "🧠 Feeding data to hungry algorithms...", emoji: "🍽️", stage: "processing", category: "tech" },
+      { message: "⚡ Channeling lightning into words...", emoji: "⚡", stage: "processing", category: "mystical" },
+      { message: "🎨 Painting masterpieces with code...", emoji: "🖼️", stage: "processing", category: "creative" },
+      { message: "🔥 Forging documents in digital flames...", emoji: "🔥", stage: "processing", category: "mystical" },
+      { message: "🌟 Sprinkling AI fairy dust everywhere...", emoji: "✨", stage: "processing", category: "mystical" },
+      { message: "🎵 Composing symphonies of data...", emoji: "🎼", stage: "processing", category: "creative" },
+      { message: "🏗️ Building castles in the cloud...", emoji: "🏰", stage: "processing", category: "construction" },
+    ];
+
+    const finalizingMessages = [
+      { message: "📚 Binding pages with digital thread...", emoji: "🧵", stage: "finalizing", category: "craft" },
+      { message: "🎯 Aiming for perfection, hitting bullseye...", emoji: "🎯", stage: "finalizing", category: "precision" },
+      { message: "💎 Polishing diamonds of wisdom...", emoji: "💎", stage: "finalizing", category: "luxury" },
+      { message: "🌈 Painting rainbows across your report...", emoji: "🌈", stage: "finalizing", category: "creative" },
+      { message: "🏆 Crafting a championship-worthy report...", emoji: "🏆", stage: "finalizing", category: "achievement" },
+      { message: "✨ Sprinkling the final magic dust...", emoji: "✨", stage: "finalizing", category: "mystical" },
+    ];
+
+    const completingMessages = [
+      { message: "🎉 Almost there! Don't press cancel now!", emoji: "⏰", stage: "completing", category: "urgent" },
+      { message: "🏁 Crossing the finish line in style...", emoji: "🏃‍♂️", stage: "completing", category: "achievement" },
+      { message: "🎊 Preparing the grand finale...", emoji: "🎆", stage: "completing", category: "celebration" },
+      { message: "📦 Wrapping your gift with care...", emoji: "🎁", stage: "completing", category: "gift" },
+      { message: "🚀 Countdown to report launch: 3... 2... 1...", emoji: "🚀", stage: "completing", category: "space" },
+    ];
+
+    const messageInterval = setInterval(() => {
+      const timeElapsed = Date.now() - startTime;
+
+      // Select message array based on progress
+      let messageArray;
+      if (progress < 20) {
+        messageArray = initMessages;
+      } else if (progress < 60) {
+        messageArray = processingMessages;
+      } else if (progress < 90) {
+        messageArray = finalizingMessages;
       } else {
-        setError('Please select a CSV file');
-        setCsvFile(null);
+        messageArray = completingMessages;
       }
-    }
-  };
 
-  const handleStartGeneration = async () => {
-    if (!csvFile) {
-      setError('Please select a CSV file');
-      return;
-    }
+      // Get a random message from the appropriate array
+      const randomIndex = Math.floor(Math.random() * messageArray.length);
+      const newMessage = messageArray[randomIndex];
+      setCurrentMessage(newMessage);
 
-    if (!selectedTemplate) {
-      setError('Please select a template');
-      return;
-    }
+      // Show cancel warning after 45 seconds
+      if (timeElapsed > 45000 && !showCancelWarning) {
+        setShowCancelWarning(true);
+      }
+    }, 1000); // Change message every 1 second
 
+    return () => clearInterval(messageInterval);
+  }, [progress, startTime, showCancelWarning]);
+
+  // Simulate more realistic progress updates
+  useEffect(() => {
+    if (status === 'generating') {
+      const progressInterval = setInterval(() => {
+        setProgress(prev => {
+          if (prev >= 95) return prev; // Don't go to 100% until actually complete
+          return prev + Math.random() * 2; // Random increments for realism
+        });
+      }, 1000);
+
+      return () => clearInterval(progressInterval);
+    }
+  }, [status]);
+
+  const generateReports = async () => {
     try {
-      setGenerationStatus(GenerationStatus.PREPARING);
+      setStatus('preparing');
       setProgress(10);
-      setError('');
 
-      const formDataToSend = new FormData();
-      formDataToSend.append('csvFile', csvFile);
-      formDataToSend.append('templateId', selectedTemplate.id);
-      formDataToSend.append('stakeholderAudience', JSON.stringify(formData.stakeholderAudience || ['Technical', 'Business']));
-
-      setGenerationStatus(GenerationStatus.GENERATING);
-      setProgress(30);
-
-      const response = await fetch('/api/generate-reports', {
-        method: 'POST',
-        body: formDataToSend,
-      });
-
-      setProgress(70);
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to generate reports');
+      // Validate required data
+      if (!selectedTemplate) {
+        throw new Error('No template selected. Please go back and select a template.');
       }
 
-      const result = await response.json();
-      
-      setGenerationStatus(GenerationStatus.PROCESSING);
-      setProgress(90);
+      if (!selectedDataSource) {
+        throw new Error('No data source selected. Please go back and select a data source.');
+      }
 
-      // Simulate processing time
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // For file upload data source, we need the uploaded file
+      if (selectedDataSource.type === 'excel_file') {
+        const uploadedFile = formData.uploadedFile as File;
+        if (!uploadedFile) {
+          throw new Error('No file uploaded. Please go back and upload a CSV file.');
+        }
 
-      setGenerationStatus(GenerationStatus.COMPLETED);
-      setProgress(100);
-      setSessionId(result.sessionId);
+        setStatus('generating');
+        setProgress(30);
+
+        // Create FormData for the API call
+        const apiFormData = new FormData();
+        apiFormData.append('csvFile', uploadedFile);
+        apiFormData.append('templateId', selectedTemplate.id);
+        apiFormData.append('stakeholderAudience', JSON.stringify(['Technical', 'Business']));
+
+        setProgress(50);
+
+        // Call the backend API
+        const response = await fetch('/api/generate-reports', {
+          method: 'POST',
+          body: apiFormData,
+        });
+
+        setProgress(80);
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Failed to generate reports');
+        }
+
+        const result = await response.json();
+        setProgress(100);
+
+        // Redirect to the reports preview page
+        setTimeout(() => {
+          navigate(`/reports/${result.sessionId}`);
+        }, 1000);
+
+      } else {
+        // For API data sources, we would need to implement the connection logic
+        throw new Error(`Data source type "${selectedDataSource.type}" is not yet implemented. Please use file upload for now.`);
+      }
 
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to generate reports');
-      setGenerationStatus(GenerationStatus.IDLE);
-      setProgress(0);
+      console.error('Report generation error:', err);
+      setStatus('error');
+      setError(err instanceof Error ? err.message : 'An unexpected error occurred');
     }
   };
 
-  const handleBack = () => {
-    setCurrentStep(WorkflowStep.CONNECT_DATA_SOURCE);
+  const handleRetry = () => {
+    setStatus('preparing');
+    setError('');
+    setProgress(0);
+    generateReports();
+  };
+
+  const handleGoBack = () => {
     navigate('/data-source');
   };
 
-  const handleViewReports = () => {
-    if (sessionId) {
-      navigate(`/reports/${sessionId}`);
-    }
-  };
-
-  const getStatusMessage = () => {
-    switch (generationStatus) {
-      case GenerationStatus.PREPARING:
-        return 'Preparing your report...';
-      case GenerationStatus.GENERATING:
-        return 'Generating content with AI...';
-      case GenerationStatus.PROCESSING:
-        return 'Processing and formatting...';
-      case GenerationStatus.COMPLETED:
-        return 'Reports generated successfully!';
-      default:
-        return 'Ready to generate your reports';
-    }
-  };
-
-  const isGenerating = (
-    generationStatus === GenerationStatus.PREPARING ||
-    generationStatus === GenerationStatus.GENERATING ||
-    generationStatus === GenerationStatus.PROCESSING
-  );
-  const isCompleted = generationStatus === GenerationStatus.COMPLETED;
+  if (status === 'error') {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-3 xs:px-4">
+        <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-6 xs:p-8 text-center">
+          <AlertCircle className="h-12 w-12 xs:h-16 xs:w-16 text-red-500 mx-auto mb-3 xs:mb-4" />
+          <h2 className="text-lg xs:text-xl font-semibold text-gray-900 mb-3 xs:mb-4">Generation Failed</h2>
+          <p className="text-sm xs:text-base text-gray-600 mb-4 xs:mb-6">{error}</p>
+          <div className="flex flex-col xs:flex-row gap-3 justify-center">
+            <button
+              onClick={handleRetry}
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors active:scale-95"
+            >
+              Try Again
+            </button>
+            <button
+              onClick={handleGoBack}
+              className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors active:scale-95"
+            >
+              Go Back
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="text-center mb-12">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">
-          Generate Document
-        </h1>
-        <p className="text-lg text-gray-600">
-          Review your selections and generate your report
-        </p>
-      </div>
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-3 xs:px-4">
+      <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-6 xs:p-8 text-center">
+        <Loader2 className="h-12 w-12 xs:h-16 xs:w-16 text-blue-600 mx-auto mb-3 xs:mb-4 animate-spin" />
+        <h2 className="text-lg xs:text-xl font-semibold text-gray-900 mb-3 xs:mb-4">
+          {status === 'preparing' ? 'Preparing Generation...' : 'Generating Reports...'}
+        </h2>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-6">Report Configuration</h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <div>
-            <h3 className="text-sm font-medium text-gray-500 mb-2">Domain</h3>
-            <p className="text-lg text-gray-900">{selectedDomain?.name}</p>
+        {/* Engaging AI Progress Message */}
+        <div className="mb-4 xs:mb-6 p-3 xs:p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border border-purple-100">
+          <div className="flex items-center justify-center mb-2">
+            <span className="text-2xl xs:text-3xl mr-2 animate-bounce">{currentMessage.emoji}</span>
+            <p className="text-sm xs:text-base font-medium text-purple-800">
+              {currentMessage.message}
+            </p>
           </div>
-          
-          <div>
-            <h3 className="text-sm font-medium text-gray-500 mb-2">Template</h3>
-            <p className="text-lg text-gray-900">{selectedTemplate?.name}</p>
-          </div>
-          
-          <div>
-            <h3 className="text-sm font-medium text-gray-500 mb-2">Data Source</h3>
-            <p className="text-lg text-gray-900">{selectedDataSource?.name}</p>
-          </div>
-          
-          <div>
-            <h3 className="text-sm font-medium text-gray-500 mb-2">Document Title</h3>
-            <p className="text-lg text-gray-900">{formData.documentTitle}</p>
-          </div>
-        </div>
 
-        {/* File Upload Section */}
-        <div className="border-t border-gray-200 pt-6 mb-6">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">Upload CSV Data</h3>
-          <div className="flex items-center justify-center w-full">
-            <label htmlFor="csv-upload" className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
-              <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                <Upload className="w-8 h-8 mb-2 text-gray-500" />
-                <p className="mb-2 text-sm text-gray-500">
-                  {csvFile ? (
-                    <span className="font-semibold text-green-600">{csvFile.name}</span>
-                  ) : (
-                    <>
-                      <span className="font-semibold">Click to upload</span> your CSV file
-                    </>
-                  )}
-                </p>
-                <p className="text-xs text-gray-500">CSV files only (MAX. 10MB)</p>
-              </div>
-              <input
-                id="csv-upload"
-                type="file"
-                accept=".csv"
-                onChange={handleFileChange}
-                className="hidden"
-                disabled={isGenerating}
-              />
-            </label>
-          </div>
-          {csvFile && (
-            <div className="mt-2 text-sm text-gray-600">
-              <span className="font-medium">Selected:</span> {csvFile.name} ({(csvFile.size / 1024).toFixed(1)} KB)
+          {/* Show cancel warning if taking too long */}
+          {showCancelWarning && (
+            <div className="mt-3 p-2 bg-yellow-100 border border-yellow-300 rounded-lg">
+              <p className="text-xs xs:text-sm text-yellow-800 font-medium">
+                {getCancelWarningMessage().message}
+              </p>
             </div>
           )}
         </div>
 
-        {/* Error Display */}
-        {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-            <p className="text-sm text-red-600">{error}</p>
+        {/* Progress Bar */}
+        <div className="w-full bg-gray-200 rounded-full h-2 mb-3 xs:mb-4">
+          <div
+            className="bg-blue-600 h-2 rounded-full transition-all duration-500 ease-out"
+            style={{ width: `${progress}%` }}
+          ></div>
+        </div>
+
+        <p className="text-sm text-gray-500">{progress}% complete</p>
+
+        {selectedTemplate && (
+          <div className="mt-4 xs:mt-6 p-3 xs:p-4 bg-blue-50 rounded-lg">
+            <p className="text-xs xs:text-sm text-blue-800">
+              <strong>Template:</strong> {selectedTemplate.name}
+            </p>
+            {selectedDataSource && (
+              <p className="text-xs xs:text-sm text-blue-800 mt-1">
+                <strong>Data Source:</strong> {selectedDataSource.name}
+              </p>
+            )}
           </div>
         )}
-
-        {/* Generation Status */}
-        <div className="border-t border-gray-200 pt-6">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-medium text-gray-900">Generation Status</h3>
-            <div className="flex items-center space-x-2">
-              {isGenerating && <Loader2 className="w-5 h-5 text-primary-600 animate-spin" />}
-              {isCompleted && <CheckCircle className="w-5 h-5 text-green-600" />}
-              <span className="text-sm text-gray-600">{getStatusMessage()}</span>
-            </div>
-          </div>
-
-          {/* Progress Bar */}
-          {(isGenerating || isCompleted) && (
-            <div className="w-full bg-gray-200 rounded-full h-2 mb-6">
-              <div
-                className="bg-primary-600 h-2 rounded-full transition-all duration-500 ease-out"
-                style={{ width: `${progress}%` }}
-              ></div>
-            </div>
-          )}
-
-          {/* Action Buttons */}
-          <div className="flex justify-between">
-            <button
-              onClick={handleBack}
-              disabled={isGenerating}
-              className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back
-            </button>
-
-            {generationStatus === GenerationStatus.IDLE && (
-              <button
-                onClick={handleStartGeneration}
-                disabled={!csvFile}
-                className="inline-flex items-center px-6 py-2 text-sm font-medium text-white bg-primary-600 border border-transparent rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <FileText className="w-4 h-4 mr-2" />
-                Generate Reports
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            )}
-
-            {isCompleted && (
-              <button
-                onClick={handleViewReports}
-                className="inline-flex items-center px-6 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-              >
-                <Eye className="w-4 h-4 mr-2" />
-                View & Download Reports
-              </button>
-            )}
-          </div>
-        </div>
       </div>
     </div>
   );
 };
+
+export default ReportGeneration;

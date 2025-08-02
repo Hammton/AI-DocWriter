@@ -100,18 +100,18 @@ export const InputForm: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="text-center mb-12">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">
+    <div className="max-w-4xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-6 xs:py-8 ipad-mini:py-12">
+      <div className="text-center mb-8 xs:mb-10 ipad-mini:mb-12">
+        <h1 className="text-2xl xs:text-3xl font-bold text-gray-900 mb-3 xs:mb-4">
           Customize Your Report
         </h1>
-        <p className="text-lg text-gray-600">
+        <p className="text-base xs:text-lg text-gray-600 px-2">
           Fill in details for the {selectedTemplate?.name}
         </p>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-        <div className="space-y-8">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 xs:p-6 ipad-mini:p-8">
+        <div className="space-y-6 xs:space-y-8">
           {/* Document Title */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -121,15 +121,15 @@ export const InputForm: React.FC = () => {
               type="text"
               value={localFormData.documentTitle}
               onChange={(e) => handleInputChange('documentTitle', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm xs:text-base"
               placeholder="Enter document title"
             />
           </div>
 
           {/* Reporting Period */}
           <div>
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Reporting Period</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <h3 className="text-base xs:text-lg font-medium text-gray-900 mb-3 xs:mb-4">Reporting Period</h3>
+            <div className="grid grid-cols-1 ipad-mini:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Start Date
@@ -197,10 +197,10 @@ export const InputForm: React.FC = () => {
 
           {/* Logo */}
           <div>
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Logo</h3>
+            <h3 className="text-base xs:text-lg font-medium text-gray-900 mb-3 xs:mb-4">Logo</h3>
             
             {/* Logo Options */}
-            <div className="flex items-center space-x-6 mb-4">
+            <div className="flex flex-col xs:flex-row xs:items-center space-y-2 xs:space-y-0 xs:space-x-6 mb-4">
               <label className="flex items-center cursor-pointer">
                 <input
                   type="radio"
@@ -221,7 +221,6 @@ export const InputForm: React.FC = () => {
                 />
                 <span className="ml-2 text-sm text-gray-700">Custom</span>
               </label>
-              <span className="text-sm text-gray-500">Default</span>
             </div>
 
             {/* Logo Preview */}
@@ -296,8 +295,8 @@ export const InputForm: React.FC = () => {
 
           {/* Stakeholder Audience */}
           <div>
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Stakeholder Audience</h3>
-            <div className="grid grid-cols-2 gap-4">
+            <h3 className="text-base xs:text-lg font-medium text-gray-900 mb-3 xs:mb-4">Stakeholder Audience</h3>
+            <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 xs:gap-4">
               {['Technical', 'Business', 'Executive', 'Operations'].map((audience) => (
                 <label key={audience} className="flex items-center cursor-pointer">
                   <input
@@ -321,17 +320,17 @@ export const InputForm: React.FC = () => {
               value={localFormData.specialInstructions}
               onChange={(e) => handleInputChange('specialInstructions', e.target.value)}
               rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm xs:text-base"
               placeholder="Any focus areas or key messages? (Optional)"
             />
           </div>
         </div>
 
         {/* Actions */}
-        <div className="flex justify-between mt-8 pt-6 border-t border-gray-200">
+        <div className="flex flex-col xs:flex-row justify-between gap-3 xs:gap-0 mt-6 xs:mt-8 pt-4 xs:pt-6 border-t border-gray-200">
           <button
             onClick={handleBack}
-            className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+            className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 active:scale-95 transition-transform"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back
@@ -339,7 +338,7 @@ export const InputForm: React.FC = () => {
           
           <button
             onClick={handleContinue}
-            className="inline-flex items-center px-6 py-2 text-sm font-medium text-white bg-primary-600 border border-transparent rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+            className="inline-flex items-center justify-center px-6 py-2 text-sm font-medium text-white bg-primary-600 border border-transparent rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 active:scale-95 transition-transform"
           >
             Continue to Generate
             <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

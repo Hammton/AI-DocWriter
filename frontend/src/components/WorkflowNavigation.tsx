@@ -53,36 +53,37 @@ export const WorkflowNavigation: React.FC<WorkflowNavigationProps> = ({
 
   return (
     <div className="bg-white shadow-sm border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="py-6">
+      <div className="max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
+        <div className="py-3 xs:py-4 ipad-mini:py-6">
           <nav aria-label="Progress">
-            <ol className="flex items-center justify-between">
-              {steps.map((step, stepIdx) => {
-                const status = getStepStatus(step.number);
-                const isCompleted = status === 'completed';
-                const isCurrent = status === 'current';
+            {/* Mobile Layout - Vertical */}
+            <div className="block ipad-mini:hidden">
+              <div className="space-y-3">
+                {steps.map((step) => {
+                  const status = getStepStatus(step.number);
+                  const isCompleted = status === 'completed';
+                  const isCurrent = status === 'current';
 
-                return (
-                  <li key={step.name} className="flex items-center flex-1">
-                    <div className="flex items-center">
+                  return (
+                    <div key={step.name} className="flex items-center">
                       <div className="relative">
                         <div
                           className={`
-                            w-10 h-10 rounded-full border-2 flex items-center justify-center text-sm font-medium
+                            w-8 h-8 rounded-full border-2 flex items-center justify-center text-xs font-medium
                             ${getStepClasses(status)}
                           `}
                         >
                           {isCompleted ? (
-                            <CheckCircle className="w-5 h-5" />
+                            <CheckCircle className="w-4 h-4" />
                           ) : (
                             <span>{step.number}</span>
                           )}
                         </div>
                         {isCurrent && (
-                          <div className="absolute -top-1 -right-1 w-3 h-3 bg-primary-400 rounded-full animate-pulse"></div>
+                          <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-primary-400 rounded-full animate-pulse"></div>
                         )}
                       </div>
-                      <div className="ml-4 min-w-0 flex-1">
+                      <div className="ml-3 min-w-0 flex-1">
                         <p
                           className={`text-sm font-medium ${
                             isCurrent ? 'text-primary-700' : 
@@ -100,9 +101,59 @@ export const WorkflowNavigation: React.FC<WorkflowNavigationProps> = ({
                         </p>
                       </div>
                     </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Tablet and Desktop Layout - Horizontal */}
+            <ol className="hidden ipad-mini:flex items-center justify-between">
+              {steps.map((step, stepIdx) => {
+                const status = getStepStatus(step.number);
+                const isCompleted = status === 'completed';
+                const isCurrent = status === 'current';
+
+                return (
+                  <li key={step.name} className="flex items-center flex-1">
+                    <div className="flex items-center">
+                      <div className="relative">
+                        <div
+                          className={`
+                            w-8 h-8 ipad:w-10 ipad:h-10 rounded-full border-2 flex items-center justify-center text-xs ipad:text-sm font-medium
+                            ${getStepClasses(status)}
+                          `}
+                        >
+                          {isCompleted ? (
+                            <CheckCircle className="w-4 h-4 ipad:w-5 ipad:h-5" />
+                          ) : (
+                            <span>{step.number}</span>
+                          )}
+                        </div>
+                        {isCurrent && (
+                          <div className="absolute -top-0.5 -right-0.5 ipad:-top-1 ipad:-right-1 w-2 h-2 ipad:w-3 ipad:h-3 bg-primary-400 rounded-full animate-pulse"></div>
+                        )}
+                      </div>
+                      <div className="ml-2 ipad:ml-4 min-w-0 flex-1">
+                        <p
+                          className={`text-xs ipad:text-sm font-medium ${
+                            isCurrent ? 'text-primary-700' : 
+                            isCompleted ? 'text-gray-900' : 'text-gray-500'
+                          }`}
+                        >
+                          {step.name}
+                        </p>
+                        <p
+                          className={`text-xs hidden ipad:block ${
+                            isCurrent || isCompleted ? 'text-gray-600' : 'text-gray-400'
+                          }`}
+                        >
+                          {step.description}
+                        </p>
+                      </div>
+                    </div>
                     
                     {stepIdx < steps.length - 1 && (
-                      <div className="flex-1 ml-6 mr-6">
+                      <div className="flex-1 ml-3 mr-3 ipad:ml-6 ipad:mr-6">
                         <div
                           className={`h-0.5 w-full ${getConnectorClasses(step.number)}`}
                         ></div>

@@ -567,18 +567,18 @@ CRITICAL INSTRUCTIONS:
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center">
+        <div className="max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-14 xs:h-16">
+            <div className="flex items-center min-w-0">
               <button
                 onClick={() => navigate('/report-generation')}
-                className="mr-4 p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg"
+                className="mr-2 xs:mr-4 p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg active:scale-95 transition-transform flex-shrink-0"
               >
-                <ArrowLeft className="h-5 w-5" />
+                <ArrowLeft className="h-4 w-4 xs:h-5 xs:w-5" />
               </button>
-              <div>
-                <h1 className="text-xl font-semibold text-gray-900">Generated Reports</h1>
-                <p className="text-sm text-gray-600">
+              <div className="min-w-0">
+                <h1 className="text-lg xs:text-xl font-semibold text-gray-900 truncate">Generated Reports</h1>
+                <p className="text-xs xs:text-sm text-gray-600">
                   {reportSession.reports.length} report{reportSession.reports.length !== 1 ? 's' : ''} generated
                 </p>
               </div>
@@ -587,14 +587,14 @@ CRITICAL INSTRUCTIONS:
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <div className="max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-4 xs:py-6 ipad-mini:py-8">
+        <div className="grid grid-cols-1 ipad-pro:grid-cols-4 gap-4 xs:gap-6 ipad-mini:gap-8">
           {/* Report List */}
-          <div className="lg:col-span-1">
+          <div className="ipad-pro:col-span-1">
             <div className="bg-white rounded-lg shadow">
-              <div className="p-4 border-b">
-                <h2 className="text-lg font-medium text-gray-900">Select Report</h2>
-                <p className="text-sm text-gray-600">Choose a report to preview</p>
+              <div className="p-3 xs:p-4 border-b">
+                <h2 className="text-base xs:text-lg font-medium text-gray-900">Select Report</h2>
+                <p className="text-xs xs:text-sm text-gray-600">Choose a report to preview</p>
               </div>
               <div className="p-2">
                 {reportSession.reports.map((report) => (

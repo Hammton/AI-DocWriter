@@ -5,7 +5,7 @@ import { DomainSelection } from './pages/DomainSelection';
 import { TemplateSelection } from './pages/TemplateSelection';
 import { InputForm } from './pages/InputForm';
 import { DataSourceSelection } from './pages/DataSourceSelection';
-import { ReportGeneration } from './pages/ReportGeneration';
+import ReportGeneration from './pages/ReportGeneration';
 import ReportPreview from './pages/ReportPreview';
 import { useWorkflowStore } from './stores/workflowStore';
 

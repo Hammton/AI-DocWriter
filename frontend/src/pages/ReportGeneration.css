@@ -1,0 +1,9 @@
+@keyframes dance {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-dance {
+  display: inline-block;
+  animation: dance 1s infinite;
+}

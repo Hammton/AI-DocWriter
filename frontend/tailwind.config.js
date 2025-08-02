@@ -6,6 +6,13 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        'xs': '475px',
+        'ipad-mini': '768px',
+        'ipad': '820px',
+        'ipad-pro': '1024px',
+        'tablet': '1180px',
+      },
       colors: {
         primary: {
           50: '#eff6ff',
